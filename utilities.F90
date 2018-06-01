@@ -16,15 +16,16 @@ module utilities
             write (*,*) NEW_LINE('')
         end subroutine
 
-        subroutine save_results(dtime)
+        subroutine save_results(dtime, filename)
             logical :: exist
             real (kind = 8) :: dtime
+            character (len = 32) :: filename
 
-            inquire(file="results.txt", exist=exist)
+            inquire(file=filename, exist=exist)
             if(exist) then
-                open(7, file="results.txt", status="old", position="append", action="write")
+                open(7, file=filename, status="old", position="append", action="write")
             else
-                open(7, file="results.txt", status="new", action="write")
+                open(7, file=filename, status="new", action="write")
             end if
 
             write(7, '(F14.3)') dtime

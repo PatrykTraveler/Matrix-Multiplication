@@ -26,10 +26,23 @@ test: testSuites.inc multTest.o $(OBJS)
 		./*$(OBJ_EXT) $(LIBS) $(FFLAGS)
 
 build:
-	gfortran $(OPT) -c utilities.F90
-	gfortran $(OPT) -c mult.F90
-	gfortran $(OPT) -c main.F90
+	gfortran $(OPT) -c utilities.F90 mult.F90 main.F90
 	gfortran $(OPT) main.o mult.o utilities.o -o main
+
+build-opt:
+	gfortran $(OPT) -c -O2 utilities.F90 mult.F90 main.F90
+	gfortran $(OPT) -O2 main.o mult.o utilities.o -o main
+
+check-time:
+	for size in 200 400 600 800 1000 1200 1400 1600 1800 2000 ; do \
+		./main $$size $$size $$size $$size 0 ./Results/normal.txt ; \
+	done ; \
+	for size in 200 400 600 800 1000 1200 1400 1600 1800 2000 ; do \
+		./main $$size $$size $$size $$size 1 ./Results/dot.txt ; \
+	done ; \
+	for size in 200 400 600 800 1000 1200 1400 1600 1800 2000 ; do \
+		./main $$size $$size $$size $$size 2 ./Results/matmul.txt ; \
+	done ; \
 
 clean:
 	rm *.o *.mod main results.txt
