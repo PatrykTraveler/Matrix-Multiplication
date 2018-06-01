@@ -13,6 +13,10 @@ Building with optimization:
 make build-opt
 ```
 ### Usage:
+To perform automatized launch of application with redirected output, run:
+```sh
+make check-time
+```
 In order to run the application, open your terminal in main folder of the project and run the following line of code. 
 ```sh
 ./main <rows1> <col1> <rows2> <col2> <optimization mode> <output path>
