@@ -1,5 +1,6 @@
 module utilities
     implicit none
+    contains
         subroutine print_array(array, N, M)
             implicit none
             real (kind = 8), intent(in) :: array(:,:)
