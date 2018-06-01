@@ -15,4 +15,19 @@ module utilities
             end do
             write (*,*) NEW_LINE('')
         end subroutine
+
+        subroutine save_results(dtime)
+            logical :: exist
+            real (kind = 8) :: dtime
+
+            inquire(file="results.txt", exist=exist)
+            if(exist) then
+                open(7, file="results.txt", status="old", position="append", action="write")
+            else
+                open(7, file="results.txt", status="new", action="write")
+            end if
+
+            write(7, '(F14.3)') dtime
+            close(7)
+        end subroutine
 end module

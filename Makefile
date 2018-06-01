@@ -32,4 +32,4 @@ build:
 	gfortran $(OPT) main.o mult.o utilities.o -o main
 
 clean:
-	rm *.o *.mod main
+	rm *.o *.mod main results.txt

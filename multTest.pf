@@ -96,5 +96,103 @@ subroutine standardTest()
 
 end subroutine standardTest
 
+@test
+subroutine dot_oneToOneTest()
+    use mult
+    use pfunit_mod
+    implicit none
+    real (kind = 8) :: m1(1,1)
+    real (kind = 8) :: m2(1,1)
+    real (kind = 8) :: m3(1,1)
+    real (kind = 8) :: m4(1,1)
+    integer (kind = 4) :: status
+
+    m1 = 7.d0
+    m2 = 5.d0
+    m4 = 35.d0
+
+    call mm_dot(m1,m2,m3,status)
+    @assertEqual(m3,m4)
+
+end subroutine 
+
+@test
+subroutine dot_oneToNTest()
+    use mult
+    use pfunit_mod
+    implicit none
+    real (kind = 8) :: m1(10,1)
+    real (kind = 8) :: m2(1,10)
+    real (kind = 8) :: m3(1,1)
+    real (kind = 8) :: m4(1,1)
+    integer (kind = 4) :: status
+
+    m1 = 1.d0
+    m2 = 1.d0
+    m4 = 10.d0
+
+    call mm_dot(m1,m2,m3,status)
+    @assertEqual(m3,m4)
+
+end subroutine 
+
+@test
+subroutine dot_bigTest()
+    use mult
+    use pfunit_mod
+    implicit none
+    real (kind = 8) :: m1(500,500)
+    real (kind = 8) :: m2(500,500)
+    real (kind = 8) :: m3(500,500)
+    real (kind = 8) :: m4(500,500)
+    integer (kind = 4) :: status
+
+    m1 = 1.d0
+    m2 = 1.d0
+    m4 = 500.d0
+
+    call mm_dot(m1,m2,m3,status)
+    @assertEqual(m3,m4)
+
+end subroutine 
+
+@test
+subroutine dot_wrongSizeTest()
+    use mult
+    use pfunit_mod
+    implicit none
+    real (kind = 8) :: m1(4,3)
+    real (kind = 8) :: m2(5,2)
+    real (kind = 8) :: m3(5,5)
+    integer (kind = 4) :: status
+
+    m1 = 1.d0
+    m2 = 1.d0
+
+    call mm_dot(m1,m2,m3,status)
+    @assertEqual(status, 1)
+
+end subroutine 
+
+@test
+subroutine dot_standardTest()
+    use mult
+    use pfunit_mod
+    implicit none
+    real (kind = 8) :: m1(3,4)
+    real (kind = 8) :: m2(4,3)
+    real (kind = 8) :: m3(4,4)
+    real (kind = 8) :: m4(4,4)
+    integer (kind = 4) :: status
+
+    m1 = 1.d0
+    m2 = 1.d0
+    m4 = 3.d0
+
+    call mm_dot(m1,m2,m3,status)
+    @assertEqual(m3,m4)
+
+end subroutine 
+
 
 

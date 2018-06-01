@@ -6,7 +6,7 @@ module mult
             real (kind = 8), intent(in) :: first(:, :)
             real (kind = 8), intent(in) :: second(:, :)
             real (kind = 8), intent(out) :: multiply(:, :)
-            integer (kind = 4) :: status
+            integer (kind = 4), intent(out) :: status
             integer (kind = 4) :: first_size(2), second_size(2), i,j,k
 
             first_size = shape(first)
@@ -34,7 +34,7 @@ module mult
             real (kind = 8), intent(in) :: first(:, :)
             real (kind = 8), intent(in) :: second(:, :)
             real (kind = 8), intent(out) :: multiply(:, :)
-            integer (kind = 4) :: status
+            integer (kind = 4), intent(out) :: status
             integer (kind = 4) :: first_size(2), second_size(2), i,j
 
             first_size = shape(first)
@@ -60,7 +60,7 @@ module mult
             real (kind = 8), intent(in) :: first(:, :)
             real (kind = 8), intent(in) :: second(:, :)
             real (kind = 8), intent(out) :: multiply(:, :)
-            integer (kind = 4) :: status
+            integer (kind = 4), intent(out) :: status
             integer (kind = 4) :: first_size(2), second_size(2)
 
             first_size = shape(first)
