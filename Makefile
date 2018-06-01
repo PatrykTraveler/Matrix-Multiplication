@@ -1,4 +1,4 @@
-OPT = -ffree-form -std=f2008 -fimplicit-none -Wall -pedantic -cpp
+OPT = -ffree-form -std=f2008 -fimplicit-none -Wall -pedantic -cpp -funroll-loops
 
 PFUNIT = /home/traveler/pFUnit
 F90_VENDOR = GNU
@@ -42,6 +42,12 @@ check-time:
 	done ; \
 	for size in 200 400 600 800 1000 1200 1400 1600 1800 2000 ; do \
 		./main $$size $$size $$size $$size 2 ./Results/matmul.txt ; \
+	done ; \
+	for size in 200 400 600 800 1000 1200 1400 1600 1800 2000 ; do \
+		./main $$size $$size $$size $$size 3 ./Results/cache.txt ; \
+	done ; \
+	for size in 200 400 600 800 1000 1200 1400 1600 1800 2000 ; do \
+		./main $$size $$size $$size $$size 4 ./Results/dotcache.txt ; \
 	done ; \
 
 clean:

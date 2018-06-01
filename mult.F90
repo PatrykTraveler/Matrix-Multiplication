@@ -63,6 +63,9 @@ module mult
             integer (kind = 4), intent(out) :: status
             integer (kind = 4) :: first_size(2), second_size(2)
 
+            first_size = shape(first)
+            second_size = shape(second)
+
             if(first_size(1) /= second_size(2)) then
                 write(*,*) "Unable to perform matrix multiplication"
                 status = 1
@@ -93,8 +96,9 @@ module mult
 
             ichunk = 512
 
-            do ii=1, first_size(2)
-                do jj=1, second_size(1)
+            do ii=1, first_size(2), ichunk
+                do jj=1, second_size(1), ichunk
+
                     do i=ii, min(ii + ichunk - 1, first_size(2))
                         do j = jj, min(jj + ichunk - 1, second_size(1))
                             do k = 1, first_size(1)
@@ -102,6 +106,7 @@ module mult
                             end do
                         end do
                     end do
+
                 end do
             end do
 
@@ -115,7 +120,7 @@ module mult
             real (kind = 8), intent(in) :: second(:, :)
             real (kind = 8), intent(out) :: multiply(:, :)
             integer (kind = 4), intent(out) :: status
-            integer (kind = 4) :: first_size(2), second_size(2), ichunk, i, j, k, ii, jj
+            integer (kind = 4) :: first_size(2), second_size(2), ichunk, i, j, ii, jj
 
             first_size = shape(first)
             second_size = shape(second)
@@ -128,13 +133,15 @@ module mult
 
             ichunk = 512 
 
-            do ii=1, first_size(2)
-                do jj=1, second_size(1)
+            do ii=1, first_size(2), ichunk
+                do jj=1, second_size(1), ichunk
+
                     do i=ii, min(ii + ichunk - 1, first_size(2))
                         do j = jj, min(jj + ichunk - 1, second_size(1))
                             multiply(i,j) = dot_product(first(:, i),second(j, :))
                         end do
                     end do
+
                 end do
             end do
 
