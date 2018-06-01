@@ -43,6 +43,10 @@ program mainp
             call mm_dot(first, second, multiply, status)
         case(2)
             call mm_mul(first, second, multiply, status)
+        case(3)
+            call mm_cache(first, second, multiply, status)
+        case(4)
+            call mm_dotcache(first, second, multiply, status)
         case default
             call mm(first, second, multiply, status)
     end select
